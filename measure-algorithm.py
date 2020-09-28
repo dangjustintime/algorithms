@@ -12,14 +12,16 @@ def insertionSort(arr):
     return arr
 
 def measureAlgorithm(func, input):
+    print("\n------------------------------------------------------------\n")
+    print("Function:\t\t" + func.__name__ + "()")
+    print("Input:\t\t\t" + str(input))
+    
     startTime = time.time_ns();
     output = func(input)
     endTime = time.time_ns();
     runTime = endTime - startTime;
-    print("\n------------------------------------------------------------\n")
-    print("Function:\t\t" + func.__name__ + "()")
-    print("Input:\t\t" + str(input))
-    print("Output:\t\t" + str(output))
+
+    print("Output:\t\t\t" + str(output))
     print("Run Time:\t\t" + str(runTime) + " seconds")
     print("Memory Size:\t\t" +str(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss) + " bytes")
     print("\n------------------------------------------------------------\n")
