@@ -1,5 +1,8 @@
+import arrayGenerator
+import functools
 import resource
 import time
+import timeit
 
 def insertionSort(arr):
     for i in range(1, len(arr)):
@@ -12,22 +15,11 @@ def insertionSort(arr):
         print("step " + str(i) + ":\t\t\t" + str(arr))
     return arr
 
-
-
 def measureAlgorithm(func, input):
-    print("\n------------------------------------------------------------\n")
     print("Function:\t\t" + func.__name__ + "()")
-    print("Input:\t\t\t" + str(input))
-    print("\n************************************************************\n") 
-    startTime = time.time_ns();
-    output = func(input)
-    endTime = time.time_ns();
-    runTime = endTime - startTime;
-    print("\n************************************************************\n") 
+    print("Input:\t\t\t" + str(input) + "\n")
+    print("\nRun Time:\t\t" + str(timeit.timeit(functools.partial(func, input), number = 1)))
+    print("Memory Size:\t\t" + str(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss) + " bytes")
+    print("Output:\t\t\t" + str(input))
 
-    print("Output:\t\t\t" + str(output))
-    print("Run Time:\t\t" + str(runTime) + " seconds")
-    print("Memory Size:\t\t" +str(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss) + " bytes")
-    print("\n------------------------------------------------------------\n")
-
-measureAlgorithm(insertionSort, [3, 5, 0, 6])
+measureAlgorithm(insertionSort, arrayGenerator.generateArray())
