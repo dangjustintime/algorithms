@@ -46,6 +46,9 @@ def BFS(rootNode, target):
     return False
 
 # depth first search
+# V = vortex    E = edge
+# time complexity: O(|V| + |E|)
+# space complexity: O(|V|)
 def DFS(rootNode, target):
     print(rootNode.val)
     if rootNode.val is target:
