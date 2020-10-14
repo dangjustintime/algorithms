@@ -1,5 +1,6 @@
 from collections import deque
 import random
+import arrayGenerator
 
 # definition for a node
 class Node(object):
@@ -59,5 +60,26 @@ def DFS(rootNode, target):
     if rootNode.right:
         DFS(rootNode.right, target)
 
+# binary search
+def BinarySearch(arr, left, right, target):
+    print(arr[left:right + 1])
+    # check base case
+    if right >= left:
+        
+        # find middle
+        mid = 1 + (right - left) // 2
+
+        # if element is target
+        if arr[mid] == target:
+            return mid
+        # select lower half if target < mid
+        elif arr[mid] > target:
+            return BinarySearch(arr, left, mid - 1, target)
+        # select higher half if target > mid
+        else:
+            return BinarySearch(arr, mid + 1, right, target)
+
 head = insertLevelOrder([1, 2, 3, 4, 5, 6, 7, 8], Node(), 0)
 
+arr = arrayGenerator.generateArray()
+BinarySearch(arr, 0, len(arr) - 1, arr[2])
