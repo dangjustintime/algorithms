@@ -61,6 +61,8 @@ def DFS(rootNode, target):
         DFS(rootNode.right, target)
 
 # binary search
+# time complexity: O(log n)
+# space complexity: O(1)
 def BinarySearch(arr, left, right, target):
     print(arr[left:right + 1])
     # check base case
@@ -79,7 +81,47 @@ def BinarySearch(arr, left, right, target):
         else:
             return BinarySearch(arr, mid + 1, right, target)
 
+# matching parenthese
+# time complexity: O(n)
+# space complexity: O(n)
+def matchingParenthesis(string):
+    # initialize stack
+    stack = deque([])
+
+    # iterate through string
+    for i in range(len(string)):
+        char = string[i]
+        
+        # check if open parenthesis
+        if char == "(" or char == "[" or char == "{":
+            # add to stack if open parenthesis
+            stack.append(char)
+        # check if closed parenthesis
+        elif char == ")" or char == "]" or char == "}":
+            # return false if stack is empty
+            if not stack:
+                return False
+
+            # pop stack
+            top = stack.pop();
+
+            # return false if top of stack does not match
+            if char == ")" and top != "(":
+                return False
+            elif char == "]" and top != "[":
+                return False
+            elif char == "}" and top != "{":
+                return False
+
+    # return true if stack is empty
+    return len(stack) == 0
+
+
 head = insertLevelOrder([1, 2, 3, 4, 5, 6, 7, 8], Node(), 0)
 
 arr = arrayGenerator.generateArray()
-BinarySearch(arr, 0, len(arr) - 1, arr[2])
+
+formula = "( a + c ) - ({[a + d]} / r)"
+
+print(formula)
+print(matchingParenthesis(formula))
