@@ -16,6 +16,22 @@ def insertLevelOrder(arr, rootNode, index):
         rootNode.right = insertLevelOrder(arr, rootNode.right, 2 * index + 2)
     return rootNode
 
+def generateSinglyLinkedList(arr):
+    head = Node(arr[0])
+    currentNode = head
+    for i in range(1, len(arr)):
+        nextNode = Node(arr[i])
+        currentNode.right = nextNode
+        currentNode = nextNode
+    return head
+
+def printSinglyLinkedList(head):
+    string = ""
+    while head:
+        string += "{} -> ".format(head.val)
+        head = head.right
+    print(string)
+
 # breadth first search
 # V = vortex    E = edge
 # time complexity: O(|V| + |E|)
@@ -116,12 +132,32 @@ def matchingParenthesis(string):
     # return true if stack is empty
     return len(stack) == 0
 
+# reverse linked list
+def reverseSinglyLinkedList(head):
+    # declare previous node and current node variable
+    prevNode = None
+    currentNode = head
 
-head = insertLevelOrder([1, 2, 3, 4, 5, 6, 7, 8], Node(), 0)
+    # iterate through list
+    while currentNode:
 
-arr = arrayGenerator.generateArray()
+        # assign next node to current node next
+        nextNode = currentNode.right
 
-formula = "( a + c ) - ({[a + d]} / r)"
+        # ***** REVERSE DIRECTION *****
+        # assign current node next to previous node
+        currentNode.right = prevNode
+        
+        # assign previous node to current node
+        prevNode = currentNode
+        
+        # assign current node to next node
+        currentNode = nextNode
+        if not currentNode:
+            return prevNode
 
-print(formula)
-print(matchingParenthesis(formula))
+head = generateSinglyLinkedList([1, 2, 3, 4, 5, 6])
+printSinglyLinkedList(head)
+
+newHead = reverseSinglyLinkedList(head)
+printSinglyLinkedList(newHead)
