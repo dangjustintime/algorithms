@@ -1,8 +1,12 @@
 from collections import deque
-import random
 import arrayGenerator
+import random
+import sys
 
-# definition for a node
+sys.setrecursionlimit(3000)
+print(sys.getrecursionlimit())
+
+# helper functions
 class Node(object):
     def __init__(self, val = 0, left = None, right = None):
         self.val = val
@@ -133,6 +137,8 @@ def matchingParenthesis(string):
     return len(stack) == 0
 
 # reverse linked list
+# time complexity: O(n)
+# space complexity: O(1)
 def reverseSinglyLinkedList(head):
     # declare previous node and current node variable
     prevNode = None
@@ -156,8 +162,36 @@ def reverseSinglyLinkedList(head):
         if not currentNode:
             return prevNode
 
-head = generateSinglyLinkedList([1, 2, 3, 4, 5, 6])
-printSinglyLinkedList(head)
+# tree traversals
+# inorder tree traversal
+# left, root, right
+# time complexity: O(n)
+# space complexity: O(1)
+def inorderTreeTraversal(rootNode):
+    if rootNode:
+        inorderTreeTraversal(root.left)
+        print(rootNode.val)
+        inorderTreeTraversal(root.right)
 
-newHead = reverseSinglyLinkedList(head)
-printSinglyLinkedList(newHead)
+# postorder tree traversal
+# left, right, root
+# time complexity: O(n)
+# space complexity: O(1)
+def postorderTreeTraversal(rootNode):
+    if rootNode:
+        postorderTreeTraversal(root.left)
+        postorderTreeTraversal(root.right)
+        print(rootNode.val)
+
+# preorder tree traversal
+# root, left, right
+# time complexity: O(n)
+# space complexity: O(1)
+def preorderTreeTraversal(rootNode):
+    if rootNode:
+        print(root.val)
+        preorderTreeTraversal(root.left)
+        preorderTreeTraversal(root.right)
+
+root = insertLevelOrder([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], Node(), 0)
+inorderTreeTraversal(root)
