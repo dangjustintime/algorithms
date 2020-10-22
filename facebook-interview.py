@@ -72,15 +72,13 @@ def DFS(rootNode, target):
     return DFSUtil(rootNode, target, visited)
 
 def DFSUtil(rootNode, target, visited):
-    if not rootNode:
-        return False
-    if rootNode in visited:
+    if not rootNode or rootNode in visited:
         return False
     print(rootNode.val)
     visited[rootNode] = True
     if rootNode.val is target:
         return True
-    return DFS(rootNode.left, target) or DFS(rootNode.right, target)
+    return DFSUtil(rootNode.left, target, visited) or DFSUtil(rootNode.right, target, visited)
 
 # binary search
 # time complexity: O(log n)
@@ -196,4 +194,4 @@ def preorderTreeTraversal(rootNode):
         preorderTreeTraversal(root.right)
 
 root = insertLevelOrder([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], Node(), 0)
-rint(DFS(root, 5))
+print(DFS(root, 999))
