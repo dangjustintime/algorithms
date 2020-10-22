@@ -3,9 +3,6 @@ import arrayGenerator
 import random
 import sys
 
-sys.setrecursionlimit(3000)
-print(sys.getrecursionlimit())
-
 # helper functions
 class Node(object):
     def __init__(self, val = 0, left = None, right = None):
@@ -71,14 +68,19 @@ def BFS(rootNode, target):
 # time complexity: O(|V| + |E|)
 # space complexity: O(|V|)
 def DFS(rootNode, target):
+    visited = {}
+    return DFSUtil(rootNode, target, visited)
+
+def DFSUtil(rootNode, target, visited):
+    if not rootNode:
+        return False
+    if rootNode in visited:
+        return False
     print(rootNode.val)
+    visited[rootNode] = True
     if rootNode.val is target:
-        print("**FOUND**")
         return True
-    if rootNode.left:
-        DFS(rootNode.left, target)
-    if rootNode.right:
-        DFS(rootNode.right, target)
+    return DFS(rootNode.left, target) or DFS(rootNode.right, target)
 
 # binary search
 # time complexity: O(log n)
@@ -194,4 +196,4 @@ def preorderTreeTraversal(rootNode):
         preorderTreeTraversal(root.right)
 
 root = insertLevelOrder([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], Node(), 0)
-inorderTreeTraversal(root)
+rint(DFS(root, 5))
